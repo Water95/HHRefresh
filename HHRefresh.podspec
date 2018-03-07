@@ -7,7 +7,10 @@ s.homepage     = "https://github.com/Water95/HHRefresh.git"
 s.license      = "MIT"
 s.author       = { "haohaisheng" => "haohaisheng95@163.com" }
 s.source       = { :git => "https://github.com/Water95/HHRefresh.git", :tag => s.version}
-s.source_files = "HHRefresh/**/*"
+s.source_files = "HHRefresh/*.{h,m}"
+s.source_files = "HHRefresh/HHRefreshCategory/*.{h,m}"
+s.source_files = "HHRefresh/HHRefreshConst/*.{h,m}"
+s.source_files = "HHRefresh/HHRefreshHeader/*.{h,m}"
 s.platform     = :ios, "8.0"
 s.requires_arc = true
 
