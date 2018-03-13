@@ -42,7 +42,7 @@
         //2 设置属性
         self.hasNoMoreData = NO;
         //3 设置默认状态
-        self.state = HHRefreshStateNormal;
+        self.state = HHFooterRefreshStateNormal;
     }
     return self;
 }
@@ -91,12 +91,12 @@
     if ([HHRefreshContentSize isEqualToString:keyPath]) {
         [self adjustFrameWithContentSize];
     }else if ([HHRefreshContentOffset isEqualToString:keyPath]){
-        if (self.state == HHRefreshStateRefreshing) {
+        if (self.state == HHFooterRefreshStateRefreshing) {
             return;
         }
         
         if (self.hasNoMoreData) {
-            self.state = HHRefreshStateNoMoreData;
+            self.state = HHFooterRefreshStateNoMoreData;
             return;
         }
         
@@ -122,16 +122,16 @@
     if (self.scrollView.isDragging) {
         //普通和即将刷新的临界点
         CGFloat normalPullingOffset = happenOffSetY + self.height;
-        if (self.state == HHRefreshStateNormal && currentOffSetY > normalPullingOffset) {
+        if (self.state == HHFooterRefreshStateNormal && currentOffSetY > normalPullingOffset) {
             //转为即将刷新状态
-            self.state = HHRefreshStatePulling;
-        }else if (self.state == HHRefreshStatePulling && currentOffSetY <= normalPullingOffset){
+            self.state = HHFooterRefreshStatePulling;
+        }else if (self.state == HHFooterRefreshStatePulling && currentOffSetY <= normalPullingOffset){
             //转为普通状态
-            self.state = HHRefreshStateNormal;
+            self.state = HHFooterRefreshStateNormal;
         }
-    }else if (self.state == HHRefreshStatePulling){
+    }else if (self.state == HHFooterRefreshStatePulling){
         //开始刷新
-        self.state = HHRefreshStateRefreshing;
+        self.state = HHFooterRefreshStateRefreshing;
     }
 }
 
@@ -188,15 +188,15 @@
     //2 保存旧状态
     HHFooterRefreshState oldState = self.state;
     
-    if (self.state != HHRefreshStateRefreshing) {
+    if (self.state != HHFooterRefreshStateRefreshing) {
         self.scrollViewOriginalInset = self.scrollView.contentInset;
     }
     
     switch (state) {
-        case HHRefreshStateNormal:
+        case HHFooterRefreshStateNormal:
         {
             self.footerTextLabel.text = RefreshFooterPullNormal;
-            if (HHRefreshStateRefreshing == oldState) {
+            if (HHFooterRefreshStateRefreshing == oldState) {
                 [UIView animateWithDuration:0.4 animations:^{
                     if (self.hasNoMoreData) {
                         self.scrollView.contentInsetBottom = 0;
@@ -209,12 +209,12 @@
             }
         }
             break;
-        case HHRefreshStatePulling:{
+        case HHFooterRefreshStatePulling:{
             
             self.footerTextLabel.text = RefreshFooterReleaseToRefresh;
             
         } break;
-        case HHRefreshStateRefreshing:{
+        case HHFooterRefreshStateRefreshing:{
             
             //1 修改显示文字
             self.footerTextLabel.text = RefreshFooterRefreshing;
@@ -231,7 +231,7 @@
             }];
             
         } break;
-        case HHRefreshStateNoMoreData:{
+        case HHFooterRefreshStateNoMoreData:{
             self.footerTextLabel.text = RefreshFooterNoMoreData;
         } break;
         default:
@@ -244,16 +244,16 @@
 - (void)footerEndRefreshing{
     double delayInSeconds = 0.3;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.state =  HHRefreshStateNormal;
+        self.state =  HHFooterRefreshStateNormal;
     });
 }
 
 - (void)setHasNoMoreData:(BOOL)hasNoMoreData{
     _hasNoMoreData = hasNoMoreData;
     if (hasNoMoreData) {
-        self.state = HHRefreshStateNoMoreData;
+        self.state = HHFooterRefreshStateNoMoreData;
     }else{
-        self.state = HHRefreshStateNormal;
+        self.state = HHFooterRefreshStateNormal;
         self.scrollView.contentInsetBottom = self.height;
     }
 }
