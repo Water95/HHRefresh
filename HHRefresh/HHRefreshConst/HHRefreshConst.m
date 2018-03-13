@@ -20,5 +20,7 @@ NSString *const HHRefreshContentSize = @"contentSize";
 NSString *const RefreshFooterPullNormal = @"上拉加载更多";
 NSString *const RefreshFooterReleaseToRefresh = @"松开加载更多";
 NSString *const RefreshFooterRefreshing = @"加载中...";
+NSString *const RefreshFooterNoMoreData = @"没有更多数据了";
 
 @end
+

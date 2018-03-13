@@ -13,8 +13,9 @@
     self = [super initWithFrame:frame style:style];
     if (self) {
         [self addHeaderWithTarget:self action:@selector(headerRefreshing)];
+        [self addFooterWithTarget:self action:@selector(footerRefreshing)];
         self.canEnableRefresh = YES;
-        self.canEnableLoadMore = YES;
+        self.canEnableLoadMore = NO;
     }
     return self;
 }
@@ -31,12 +32,18 @@
         [self.refreshDelegate refreshViewHeaderDidStartRefresh:self];
     }
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+- (void)footerRefreshing{
+    if (self.refreshDelegate && [self.refreshDelegate respondsToSelector:@selector(refreshViewLoadMoreDidStartFrefreh:)]) {
+        [self.refreshDelegate refreshViewLoadMoreDidStartFrefreh:self];
+    }
 }
-*/
+
+- (void)setCanEnableRefresh:(BOOL)canEnableRefresh{
+    
+}
+- (void)setCanEnableLoadMore:(BOOL)canEnableLoadMore{
+    
+}
 
 @end

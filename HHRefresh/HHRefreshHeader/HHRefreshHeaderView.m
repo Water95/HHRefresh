@@ -162,7 +162,7 @@
             if (self.headerRefreshTarget && [self.headerRefreshTarget respondsToSelector:self.headerRefreshAction]) {
                 ((void(*)(id,SEL))objc_msgSend)(self.headerRefreshTarget,self.headerRefreshAction);
             }
-            //正在刷新中
+            //进入刷新状态
             [UIView animateWithDuration:0.4 animations:^{
                 self.scrollView.contentInsetTop =  self.height;
             }];

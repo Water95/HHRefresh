@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIScrollView+HHRefresh.h"
-
+#import "UIScrollView+HHRefreshFooter.h"
 @protocol HHRefreshDelegate <NSObject>
 @required
 -(void)refreshViewHeaderDidStartRefresh:(id)refreshView;
@@ -18,8 +18,17 @@
 
 @interface UIRefreshTableView : UITableView
 
-@property (nonatomic,assign) BOOL canEnableLoadMore;
+
+/**
+ 是否可以下拉刷新，默认是YES
+ */
 @property (nonatomic,assign) BOOL canEnableRefresh;
+
+/**
+  是否可以上拉加载更多，默认是NO
+ */
+@property (nonatomic,assign) BOOL canEnableLoadMore;
+
 @property (nonatomic,weak)   id<HHRefreshDelegate> refreshDelegate;
 
 @end
