@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "HHRefresh"
-s.version      = "0.0.3"
+s.version      = "0.0.5"
 s.summary      = "易于定制下拉刷新控件的模板控件"
 s.homepage     = "https://github.com/Water95/HHRefresh.git"
 s.license      = "MIT"

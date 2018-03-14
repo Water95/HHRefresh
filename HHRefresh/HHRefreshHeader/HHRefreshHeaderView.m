@@ -138,7 +138,7 @@
     }
     
     HHRefreshState oldState = self.state;
-    
+    _state = state;
     switch (state) {
         case HHRefreshStateNormal:
         {
@@ -177,7 +177,6 @@
         default:
             break;
     }
-    _state = state;
 }
 #pragma mark 开始刷新
 - (void)headerBeginRefreshing{
